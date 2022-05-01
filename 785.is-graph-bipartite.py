@@ -12,7 +12,7 @@ class Solution:
             if idx in colored:
                 return color == colored[idx]
             colored[idx] = color                            
-            return all(dfs_color(-color, nb, graph, colored) for nb in graph[idx])
+            return all(dfs_color(-color, neighbor, graph, colored) for neighbor in graph[idx])
     
         return all(i in colored or dfs_color(1, i, graph, colored) for i in range(n)) 
         
