@@ -82,35 +82,22 @@ import collections
 
 class Solution:
     def connect(self, root: 'Node') -> 'Node':
-        tree_lv_order = self.levelOrder(root)
-        print(tree_lv_order)
-        for level in tree_lv_order:
-            for i in range(len(level)):
-                node = level[i]
-                if i == len(level) - 1:
-                    continue
-                else:
-                    node.next = level[i+1]
-
-    def levelOrder(self, node):
-        res = []
-        if node is None:
-            return res
-        q = collections.deque()
-        q.append(node)
-        print(node)
-        print(q)
-        while q:
-            curSize = len(q)
-            level = []
-            while curSize > 0:
-                curNode = q.popleft()
-                level.append(curNode)
-                curSize -= 1
-                if curNode.left is not None:
-                    q.append(curNode.left)
-                if curNode.right is not None:
-                    q.append(curNode.right)
-            res.append(level)
+        if root is None:
+            return root
+        q = []
+        q.append(root)
+        tail = root
+        while len(q) > 0:
+            node = q.pop(0)
+            if node.left:
+                q.append(node.left)
+            if node.right:
+                q.append(node.right)
+            if node == tail:
+                node.next = None
+                tail = q[-1] if len(q) > 0 else None
+            else:
+                node.next = q[0]
+        return root
 # @lc code=end
 
