@@ -1,0 +1,75 @@
+/*
+ * @lc app=leetcode id=240 lang=cpp
+ *
+ * [240] Search a 2D Matrix II
+ *
+ * https://leetcode.com/problems/search-a-2d-matrix-ii/description/
+ *
+ * algorithms
+ * Medium (48.39%)
+ * Likes:    8285
+ * Dislikes: 137
+ * Total Accepted:    651.7K
+ * Total Submissions: 1.3M
+ * Testcase Example:
+ '[[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]]\n'
+ + '5'
+ *
+ * Write an efficient algorithm that searches for a value target in an m x n
+ * integer matrix matrix. This matrix has the following properties:
+ *
+ *
+ * Integers in each row are sorted in ascending from left to right.
+ * Integers in each column are sorted in ascending from top to bottom.
+ *
+ *
+ *
+ * Example 1:
+ *
+ *
+ * Input: matrix =
+ * [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]],
+ * target = 5
+ * Output: true
+ *
+ *
+ * Example 2:
+ *
+ *
+ * Input: matrix =
+ * [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]],
+ * target = 20
+ * Output: false
+ *
+ *
+ *
+ * Constraints:
+ *
+ *
+ * m == matrix.length
+ * n == matrix[i].length
+ * 1 <= n, m <= 300
+ * -10^9 <= matrix[i][j] <= 10^9
+ * All the integers in each row are sorted in ascending order.
+ * All the integers in each column are sorted in ascending order.
+ * -10^9 <= target <= 10^9
+ *
+ *
+ */
+
+// @lc code=start
+class Solution {
+   public:
+    bool searchMatrix(vector<vector<int>>& mat, int tar) {
+        if (mat.size() == 0) {
+            return false;
+        }
+        int m = mat.size(), n = mat[0].size(), r = 0, c = n - 1;
+        while (r < m && c >= 0) {
+            if (mat[r][c] == tar) return true;
+            mat[r][c] > tar ? c-- : r++;
+        }
+        return false;
+    }
+};
+// @lc code=end
